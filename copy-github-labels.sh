@@ -6,12 +6,12 @@ GH_TOKEN=""
 GH_DOMAIN="https://api.github.com"
 
 # The source repository whose labels to copy.
-SRC_GH_USER="EllipsisEducation"
-SRC_GH_REPO="portal"
+SRC_GH_USER=""
+SRC_GH_REPO=""
 
 # The target repository to add or update labels.
-TGT_GH_USER="EllipsisEducation"
-TGT_GH_REPO="synapps-terraform"
+TGT_GH_USER=""
+TGT_GH_REPO=""
 
 # ---------------------------------------------------------
 
