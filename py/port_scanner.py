@@ -1,24 +1,24 @@
+import concurrent.futures
 import csv
 from ipaddress import ip_network
-from typing import List
+from typing import List, Tuple
 
 import nmap
 
 
-def scan_ports(target: str) -> List[tuple]:
+def scan_host(host: str, port_range: str) -> List[Tuple]:
+    print(f"Scanning host: {host}")
     nm = nmap.PortScanner()
-    nm.scan(
-        hosts=target,
-        arguments="-sV",  # TCP scan all ports with version detection
-        # hosts=target, arguments="-sT -p 1-65535 -T4"
-    )  # TCP scan all ports with aggressive timing
+    nm.scan(hosts=host, arguments=f"-sV -p {port_range}")
     results = []
 
-    for host in nm.all_hosts():
+    if host in nm.all_hosts():
+        print(f"Host {host} is up")
         for proto in nm[host].all_protocols():
             lport = nm[host][proto].keys()
             for port in lport:
-                service = nm[host:str][proto:str][port:str]["state"]
+                service = nm[host][proto][port]
+                print(f"Found open port: {host}:{port}")
                 results.append(
                     (
                         host,
@@ -33,11 +33,32 @@ def scan_ports(target: str) -> List[tuple]:
                         service.get("conf", ""),
                     )
                 )
+    else:
+        print(f"Host {host} is down")
 
     return results
 
 
-def write_to_file(results: List[tuple], output_file: str):
+def scan_network(target: str, port_range: str, max_workers: int = 50) -> List[Tuple]:
+    network = ip_network(target)
+    ip_list = [
+        str(ip)
+        for ip in network.hosts()
+        if ip != network.network_address and ip != network.broadcast_address
+    ]
+    print(f"Scanning {len(ip_list)} hosts in network {target}")
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = [executor.submit(scan_host, ip, port_range) for ip in ip_list]
+        results = []
+        for future in concurrent.futures.as_completed(futures):
+            result = future.result()
+            results.extend(result)
+
+    return results
+
+
+def write_to_file(results: List[Tuple], output_file: str):
     fieldnames = [
         "host",
         "port",
@@ -58,7 +79,8 @@ def write_to_file(results: List[tuple], output_file: str):
 
 
 def main():
-    target = input("Enter the target IP address and subnet (e.g., 192.168.1.0/24 ): ")
+    target = input("Enter the target IP address and subnet (e.g., 192.168.1.0/24): ")
+    port_range = input("Enter the port range to scan (e.g., 1-1000): ")
 
     try:
         ip_network(target)
@@ -68,18 +90,10 @@ def main():
 
     output_file = f"{target.replace('/', '_')}_port_scan.csv"
 
-    try:
-        results = scan_ports(target)
-        write_to_file(results, output_file)
-        print(f"Scan results saved to {output_file}")
-    except nmap.PortScannerError as e:
-        print(f"Scan failed: {e}")
-    except nmap.PortScannerHostDiscoveryError as e:
-        print(f"Scan failed: {e}")
-    except nmap.PortScannerTimeout as e:
-        print(f"Scan timeout: {e}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    results = scan_network(target, port_range)
+    print(f"Scan completed, {len(results)} open ports found")
+    write_to_file(results, output_file)
+    print(f"Scan results saved to {output_file}")
 
 
 if __name__ == "__main__":
