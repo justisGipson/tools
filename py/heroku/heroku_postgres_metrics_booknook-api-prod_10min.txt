@@ -1,0 +1,138 @@
+Heroku Postgres Metrics Summary:
+- Source: MIXED
+
+Primary Database:
+  - Active Connections:
+    - Average: 64.5
+    - Minimum: 54
+    - Maximum: 87
+  - Waiting Connections:
+    - Average: 0.0
+    - Minimum: 0
+    - Maximum: 0
+  - Connections Percentage Used:
+    - Average: 12.9
+    - Minimum: 10.8
+    - Maximum: 17.4
+  - Load Average (1m):
+    - Average: 0.07919921875
+    - Minimum: 0.05828125
+    - Maximum: 0.09609375
+  - Load Average (5m):
+    - Average: 0.05919921875
+    - Minimum: 0.0
+    - Maximum: 0.08125
+  - Load Average (15m):
+    - Average: 0.048984375
+    - Minimum: 0.03390625
+    - Maximum: 0.05703125
+  - Read IOPS:
+    - Average: 0.0
+    - Minimum: 0.0
+    - Maximum: 0.0
+  - Write IOPS:
+    - Average: 6.9344125
+    - Minimum: 0.52
+    - Maximum: 17.825
+  - IOPS Percentage Used:
+    - Average: 0.0575
+    - Minimum: 0.0
+    - Maximum: 0.15
+  - Temporary Disk Used:
+    - Average: 0.54
+    - Minimum: 0.54
+    - Maximum: 0.54
+  - Temporary Disk Available:
+    - Average: 72.44
+    - Minimum: 72.44
+    - Maximum: 72.44
+  - Memory Total:
+    - Average: 522.58
+    - Minimum: 522.58
+    - Maximum: 522.58
+  - Memory Free:
+    - Average: 474.7075
+    - Minimum: 474.46
+    - Maximum: 475.05
+  - Memory Percentage Used:
+    - Average: 9.16125
+    - Minimum: 9.1
+    - Maximum: 9.21
+  - Memory Cached:
+    - Average: 42.4725
+    - Minimum: 42.47
+    - Maximum: 42.48
+  - Memory Postgres:
+    - Average: 0.71
+    - Minimum: 0.51
+    - Maximum: 0.87
+  - Max IOPS: 12000
+
+Follower Database:
+  - Active Connections:
+    - Average: 9.875
+    - Minimum: 9
+    - Maximum: 10
+  - Waiting Connections:
+    - Average: 0.0
+    - Minimum: 0
+    - Maximum: 0
+  - Connections Percentage Used:
+    - Average: 1.975
+    - Minimum: 1.8
+    - Maximum: 2.0
+  - Load Average (1m):
+    - Average: 0.0121875
+    - Minimum: 0.0
+    - Maximum: 0.0325
+  - Load Average (5m):
+    - Average: 0.005625
+    - Minimum: 0.0
+    - Maximum: 0.015
+  - Load Average (15m):
+    - Average: 0.0009375
+    - Minimum: 0.0
+    - Maximum: 0.0025
+  - Read IOPS:
+    - Average: 0.2999615
+    - Minimum: 0.0
+    - Maximum: 1.1449
+  - Write IOPS:
+    - Average: 10.5652375
+    - Minimum: 3.0
+    - Maximum: 20.45
+  - IOPS Percentage Used:
+    - Average: 0.36375
+    - Minimum: 0.12
+    - Maximum: 0.68
+  - Temporary Disk Used:
+    - Average: 0.54
+    - Minimum: 0.54
+    - Maximum: 0.54
+  - Temporary Disk Available:
+    - Average: 72.44
+    - Minimum: 72.44
+    - Maximum: 72.44
+  - Memory Total:
+    - Average: 32.39
+    - Minimum: 32.39
+    - Maximum: 32.39
+  - Memory Free:
+    - Average: 27.225
+    - Minimum: 27.18
+    - Maximum: 27.25
+  - Memory Percentage Used:
+    - Average: 15.940000000000001
+    - Minimum: 15.88
+    - Maximum: 16.07
+  - Memory Cached:
+    - Average: 4.305
+    - Minimum: 4.28
+    - Maximum: 4.34
+  - Memory Postgres:
+    - Average: 0.02
+    - Minimum: 0.02
+    - Maximum: 0.02
+  - Max IOPS: 3000
+
+Metrics collected over 10 minutes.
